@@ -2,6 +2,7 @@ void runKatas() {
 
 }
 
+//TODO
 //Array Leaders (Array Series #3)
 //An element is leader if it is greater than The Sum all the elements to its right side.
 //Given an array/list [] of integers , Find all the LEADERS in the array.
@@ -31,6 +32,7 @@ List<int> arrayLeaders2(List<int> numbers) {
   return leaders;
 }
 
+//TODO
 //How many stairs will Suzuki climb in 20 years?
 //20_year_estimate = one_year_total * 20
 // stairs = [sunday,monday,tuesday,wednesday,thursday,friday,saturday]
@@ -38,3 +40,24 @@ List<int> arrayLeaders2(List<int> numbers) {
 
 int stairsIn20(List<List<int>> arr) =>
     arr.expand((p) => p).toList().map((e) => e).toList().reduce((a, b) => a + b)*20;
+
+//TODO
+// Vowel Count
+// Return the number (count) of vowels in the given string.
+// We will consider a, e, i, o, u as vowels for this Kata (but not y).
+// The input string will only consist of lower case letters and/or spaces.
+
+int getCount(String inputStr){
+  List listAll = inputStr.split('');
+  var cleared = 0;
+  for (var item in listAll) {
+    if (['a', 'e', 'i', 'o', 'u'].contains(item)) cleared ++;
+  }
+  return cleared;
+}
+
+int getCount2(String str) => new RegExp('[aeiou]').allMatches(str).length;
+
+int getCount3(String inputStr){
+  return inputStr.split('').fold(0, (a, b) => a += 'aeiou'.contains(b) ? 1 : 0 );
+}
