@@ -1,4 +1,6 @@
-void runKatas() {}
+void runKatas() {
+  var result = longest('aretheyhere', 'yestheyarehere');
+}
 
 //TODO
 //Array Leaders (Array Series #3)
@@ -63,3 +65,17 @@ int getCount3(String inputStr) {
 //Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
 
 bool XO(str) => 'x'.allMatches(str.toLowerCase()).length == 'o'.allMatches(str.toLowerCase()).length;
+
+//TODO
+//Take 2 strings s1 and s2 including only letters from a to z.
+//Return a new sorted string, the longest possible, containing distinct letters - each taken only once - coming from s1 or s2.
+//a = "xyaabbbccccdefww"
+// b = "xxxxyyyyabklmopq"
+// longest(a, b) -> "abcdefklmopqwxy"
+
+String longest(String a, String b) {
+  var result = (a + b).split('')..sort();
+  return result.toSet().join('');
+}
+
+String longest2(a, b) => (((a + b).split('').toSet().toList())..sort()).join();
