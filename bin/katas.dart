@@ -1,5 +1,7 @@
+import 'dart:math' as math;
+
 void runKatas() {
-  var result = longest('aretheyhere', 'yestheyarehere');
+  var result = maxGap2 ([13,10,5,2,9]);
 }
 
 //TODO
@@ -79,3 +81,21 @@ String longest(String a, String b) {
 }
 
 String longest2(a, b) => (((a + b).split('').toSet().toList())..sort()).join();
+
+//TODO
+//Given an array/list [] of integers , Find The maximum difference between the successive elements in its sorted form.
+
+int maxGap(nums) {
+  int gap = 0;
+  nums.sort();
+  for (int i = 0; i < nums.length - 1; i++) {
+    int curGap = (nums[i] - nums[i + 1]).abs();
+    gap = curGap > gap ? curGap : gap;
+  }
+  return gap;
+}
+
+int maxGap2(List<int> nums) {
+  nums.sort((a, b) => a - b);
+  return List.generate(nums.length - 1, (i) => (nums[i] - nums[i + 1]).abs()).reduce(math.max);
+}
