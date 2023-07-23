@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 void runKatas() {
-  var result = maxGap2 ([13,10,5,2,9]);
+  print (productArray([3, 27, 4, 2]));
 }
 
 //TODO
@@ -98,4 +98,20 @@ int maxGap(nums) {
 int maxGap2(List<int> nums) {
   nums.sort((a, b) => a - b);
   return List.generate(nums.length - 1, (i) => (nums[i] - nums[i + 1]).abs()).reduce(math.max);
+}
+
+//TODO
+//Given an array/list [] of integers , Construct a product array Of same size Such That prod[i] is equal to The Product of all the elements of Arr[] except Arr[i].
+
+List<int> productArray(List<int> nums) {
+  List<int> result = [];
+  for (int num in nums) {
+    result.add(nums.reduce((value, element) => value * element) ~/ num);
+  }
+  return result;
+}
+
+List productArray2(List<int> nums) {
+  final total = nums.reduce((curr, next) => curr * next);
+  return nums.map((v) => total / v).toList();
 }
