@@ -247,3 +247,21 @@ String createPhoneNumber3(List numbers) {
 String spinWords(String str) {
   return str.split(' ').map((v) => v.length >= 5 ? v.split('').reversed.join() : v).toList().join(' ');
 }
+
+//TODO You are given an array (which will have a length of at least 3, but could be very large) containing integers.
+// The array is either entirely comprised of odd integers or entirely comprised of even integers except for a single integer N.
+// Write a method that takes the array as an argument and returns this "outlier" N.
+
+int find(List integers) {
+  int found = 0;
+  for (int i = 1; i < integers.length; i++) {
+    if ((integers[i - 1] + integers[i]).isOdd) found = i!= integers.length-1 ? integers[i - 1] : (integers[i-2] + integers[i-1]).isOdd? integers[i-1] : integers[i];
+  }
+  return found;
+}
+
+int find2(List integers) {
+  bool isEvenList = (integers.where((i) => i.isEven).length == 1);
+
+  return integers.firstWhere((i) => isEvenList ? i.isEven : i.isOdd);
+}
