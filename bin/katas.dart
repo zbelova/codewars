@@ -157,3 +157,56 @@ int duplicateCount2(String text){
 
   return Set.from(doubles).length;
 }
+
+//TODO The rgb function is incomplete. Complete it so that passing in RGB decimal values will result in a hexadecimal representation being returned. Valid decimal values for RGB are 0 - 255. Any values that fall out of that range must be rounded to the closest valid value.
+//
+// Note: Your answer should always be 6 characters long, the shorthand with 3 will not work here.
+String rgb(int r, int g, int b)
+{
+  String result = '';
+  List<int> rgbList = [r, g, b];
+  for (var item in rgbList) {
+    if (item < 0) item = 0;
+    if (item > 255) item = 255;
+    result += item.toRadixString(16).padLeft(2, '0').toUpperCase();
+  }
+  return result;
+}
+
+String rgb2(int r, int g, int b) {
+  return [r, g, b]
+      .map((e) => e.clamp(0, 255).toInt().toRadixString(16).padLeft(2, '0'))
+      .join()
+      .toUpperCase();
+}
+
+//TODO The drawing shows 6 squares the sides of which have a length of 1, 1, 2, 3, 5, 8. It's easy to see that the sum of the perimeters of these squares is : 4 * (1 + 1 + 2 + 3 + 5 + 8) = 4 * 20 = 80
+//
+// Could you give the sum of the perimeters of all the squares in a rectangle when there are n + 1 squares disposed in the same manner as in the drawing:
+
+BigInt perimeter(int m) {
+  BigInt result = BigInt.zero;
+  List<BigInt> fibanache = [BigInt.one, BigInt.one];
+  for (int i = 2; i <= m; i++) {
+    fibanache.add(fibanache[i - 1] + fibanache[i - 2]);
+  }
+  for (var item in fibanache) {
+    result += item;
+  }
+  return result * BigInt.from(4);
+}
+
+BigInt perimeter2(int m) {
+  var a = BigInt.zero;
+  var b = BigInt.one;
+  var sum = BigInt.one;
+
+  for (var i = 0; i < m; i++) {
+    final v = a + b;
+    a = b;
+    b = v;
+    sum += v;
+  }
+
+  return sum * BigInt.from(4);
+}
