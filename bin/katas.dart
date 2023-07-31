@@ -205,29 +205,27 @@ BigInt perimeter2(int m) {
 
 int solution(int n) {
   List numbers = [];
-    for (int i = 1; i < n; i++) {
-      if (i % 3 == 0 && !numbers.contains(i)) {
-        numbers.add(i);
-      }
-      if (i % 5 == 0 && !numbers.contains(i)) {
-        numbers.add(i);
-      }
+  for (int i = 1; i < n; i++) {
+    if (i % 3 == 0 && !numbers.contains(i)) {
+      numbers.add(i);
     }
-    return numbers.fold(0, (num p, v) => p + v) as int;
+    if (i % 5 == 0 && !numbers.contains(i)) {
+      numbers.add(i);
+    }
+  }
+  return numbers.fold(0, (num p, v) => p + v) as int;
 }
 
 int solution2(int n) {
   int sum = 0;
-  for(int i = 0; i < n; i++)
-    sum += i % 3 ==0 || i % 5 == 0 ? i : 0;
+  for (int i = 0; i < n; i++) sum += i % 3 == 0 || i % 5 == 0 ? i : 0;
   return sum;
 }
 
 //TODO Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
 //createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
 
-String createPhoneNumber(List numbers)
-=> '(${numbers[0]}${numbers[1]}${numbers[2]}) ${numbers[3]}${numbers[4]}${numbers[5]}-${numbers[6]}${numbers[7]}${numbers[8]}${numbers[9]}';
+String createPhoneNumber(List numbers) => '(${numbers[0]}${numbers[1]}${numbers[2]}) ${numbers[3]}${numbers[4]}${numbers[5]}-${numbers[6]}${numbers[7]}${numbers[8]}${numbers[9]}';
 
 String createPhoneNumber2(List numbers) {
   var n = numbers.join('');
@@ -236,10 +234,16 @@ String createPhoneNumber2(List numbers) {
 
 String createPhoneNumber3(List numbers) {
   var format = "(xxx) xxx-xxxx";
-  for(var i = 0; i < numbers.length; i++)
-  {
+  for (var i = 0; i < numbers.length; i++) {
     format = format.replaceFirst('x', numbers[i].toString());
   }
 
   return format;
+}
+
+//TODO Write a function that takes in a string of one or more words, and returns the same string, but with all five or more letter words reversed (Just like the name of this Kata).
+// Strings passed in will consist of only letters and spaces. Spaces will be included only when more than one word is present.
+
+String spinWords(String str) {
+  return str.split(' ').map((v) => v.length >= 5 ? v.split('').reversed.join() : v).toList().join(' ');
 }
