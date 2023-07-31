@@ -40,7 +40,8 @@ List<int> arrayLeaders2(List<int> numbers) {
 // stairs = [sunday,monday,tuesday,wednesday,thursday,friday,saturday]
 // sunday = [6737, 7244, 5776, 9826, 7057, 9247, 5842, 5484, 6543, 5153, 6832, 8274, 7148, 6152, 5940, 8040, 9174, 7555, 7682, 5252, 8793, 8837, 7320, 8478, 6063, 5751, 9716, 5085, 7315, 7859, 6628, 5425, 6331, 7097, 6249, 8381, 5936, 8496, 6934, 8347, 7036, 6421, 6510, 5821, 8602, 5312, 7836, 8032, 9871, 5990, 6309, 7825]
 
-int stairsIn20(List<List<int>> arr) => arr.expand((p) => p).toList().map((e) => e).toList().reduce((a, b) => a + b) * 20; //нужен ли тут мап и ту лист? не нужен вроде, остался после переноса 20 в конец
+int stairsIn20(List<List<int>> arr) =>
+    arr.expand((p) => p).toList().map((e) => e).toList().reduce((a, b) => a + b) * 20; //нужен ли тут мап и ту лист? не нужен вроде, остался после переноса 20 в конец
 
 //TODO
 // Vowel Count
@@ -57,10 +58,7 @@ int getCount(String inputStr) {
   return cleared;
 }
 
-int getCount2(String str) =>
-    new RegExp('[aeiou]')
-        .allMatches(str)
-        .length;
+int getCount2(String str) => new RegExp('[aeiou]').allMatches(str).length;
 
 int getCount3(String inputStr) {
   return inputStr.split('').fold(0, (a, b) => a += 'aeiou'.contains(b) ? 1 : 0);
@@ -69,12 +67,7 @@ int getCount3(String inputStr) {
 //TODO
 //Check to see if a string has the same amount of 'x's and 'o's. The method must return a boolean and be case insensitive. The string can contain any char.
 
-bool XO(str) =>
-    'x'
-        .allMatches(str.toLowerCase())
-        .length == 'o'
-        .allMatches(str.toLowerCase())
-        .length;
+bool XO(str) => 'x'.allMatches(str.toLowerCase()).length == 'o'.allMatches(str.toLowerCase()).length;
 
 //TODO
 //Take 2 strings s1 and s2 including only letters from a to z.
@@ -84,14 +77,11 @@ bool XO(str) =>
 // longest(a, b) -> "abcdefklmopqwxy"
 
 String longest(String a, String b) {
-  var result = (a + b).split('')
-    ..sort();
+  var result = (a + b).split('')..sort();
   return result.toSet().join('');
 }
 
-String longest2(a, b) =>
-    (((a + b).split('').toSet().toList())
-      ..sort()).join();
+String longest2(a, b) => (((a + b).split('').toSet().toList())..sort()).join();
 
 //TODO
 //Given an array/list [] of integers , Find The maximum difference between the successive elements in its sorted form.
@@ -141,17 +131,17 @@ int stray(numbers) {
 
 //count number of non-unique characters
 
-int duplicateCount(String text){
+int duplicateCount(String text) {
   int result = 0;
   List<String> textList = text.toLowerCase().split('');
-  List<String> setList= textList.toSet().toList();
+  List<String> setList = textList.toSet().toList();
   for (var item in setList) {
     if (textList.where((element) => element == item).length > 1) result++;
   }
   return result;
 }
 
-int duplicateCount2(String text){
+int duplicateCount2(String text) {
   text = text.toLowerCase();
   var doubles = text.split("").where((c) => text.indexOf(c) < text.lastIndexOf(c));
 
@@ -161,8 +151,7 @@ int duplicateCount2(String text){
 //TODO The rgb function is incomplete. Complete it so that passing in RGB decimal values will result in a hexadecimal representation being returned. Valid decimal values for RGB are 0 - 255. Any values that fall out of that range must be rounded to the closest valid value.
 //
 // Note: Your answer should always be 6 characters long, the shorthand with 3 will not work here.
-String rgb(int r, int g, int b)
-{
+String rgb(int r, int g, int b) {
   String result = '';
   List<int> rgbList = [r, g, b];
   for (var item in rgbList) {
@@ -174,10 +163,7 @@ String rgb(int r, int g, int b)
 }
 
 String rgb2(int r, int g, int b) {
-  return [r, g, b]
-      .map((e) => e.clamp(0, 255).toInt().toRadixString(16).padLeft(2, '0'))
-      .join()
-      .toUpperCase();
+  return [r, g, b].map((e) => e.clamp(0, 255).toInt().toRadixString(16).padLeft(2, '0')).join().toUpperCase();
 }
 
 //TODO The drawing shows 6 squares the sides of which have a length of 1, 1, 2, 3, 5, 8. It's easy to see that the sum of the perimeters of these squares is : 4 * (1 + 1 + 2 + 3 + 5 + 8) = 4 * 20 = 80
@@ -209,4 +195,51 @@ BigInt perimeter2(int m) {
   }
 
   return sum * BigInt.from(4);
+}
+
+//TODO If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+//
+// Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
+//
+// Note: If the number is a multiple of both 3 and 5, only count it once.
+
+int solution(int n) {
+  List numbers = [];
+    for (int i = 1; i < n; i++) {
+      if (i % 3 == 0 && !numbers.contains(i)) {
+        numbers.add(i);
+      }
+      if (i % 5 == 0 && !numbers.contains(i)) {
+        numbers.add(i);
+      }
+    }
+    return numbers.fold(0, (num p, v) => p + v) as int;
+}
+
+int solution2(int n) {
+  int sum = 0;
+  for(int i = 0; i < n; i++)
+    sum += i % 3 ==0 || i % 5 == 0 ? i : 0;
+  return sum;
+}
+
+//TODO Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+//createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) // => returns "(123) 456-7890"
+
+String createPhoneNumber(List numbers)
+=> '(${numbers[0]}${numbers[1]}${numbers[2]}) ${numbers[3]}${numbers[4]}${numbers[5]}-${numbers[6]}${numbers[7]}${numbers[8]}${numbers[9]}';
+
+String createPhoneNumber2(List numbers) {
+  var n = numbers.join('');
+  return '(${n.substring(0, 3)}) ${n.substring(3, 6)}-${n.substring(6)}';
+}
+
+String createPhoneNumber3(List numbers) {
+  var format = "(xxx) xxx-xxxx";
+  for(var i = 0; i < numbers.length; i++)
+  {
+    format = format.replaceFirst('x', numbers[i].toString());
+  }
+
+  return format;
 }
